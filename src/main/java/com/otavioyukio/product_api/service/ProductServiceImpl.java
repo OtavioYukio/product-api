@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.otavioyukio.product_api.exception.ProductNotFoundException;
 import com.otavioyukio.product_api.mapper.ProductMapper;
 import com.otavioyukio.product_api.model.Product;
+import com.otavioyukio.product_api.model.ProductRequestDTO;
 import com.otavioyukio.product_api.model.ProductResponseDTO;
 import com.otavioyukio.product_api.repository.ProductRepository;
 
@@ -35,6 +36,11 @@ public class ProductServiceImpl implements ProductService {
                             .orElseThrow(() -> new ProductNotFoundException(id));
         
         return productMapper.toResponse(product);
+    }
+
+    public ProductResponseDTO createProduct(ProductRequestDTO productRequestDTO) {
+        Product product = productMapper.toEntity(productRequestDTO);
+        return productMapper.toResponse(productRepository.save(product));
     }
 
 }
