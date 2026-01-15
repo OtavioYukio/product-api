@@ -12,7 +12,6 @@ public record ProductRequestDTO(
     @Size(max = 255)
     String title,
 
-    @NotNull
     String description,
     
     @NotNull
