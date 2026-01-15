@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.otavioyukio.product_api.exception.ProductNotFoundException;
 import com.otavioyukio.product_api.mapper.ProductMapper;
 import com.otavioyukio.product_api.model.Product;
 import com.otavioyukio.product_api.model.ProductResponseDTO;
@@ -27,6 +28,13 @@ public class ProductServiceImpl implements ProductService {
                 .and(Sort.by("price").ascending());
 
         return productRepository.findAll(sort).stream().map(productMapper::toResponse).toList();
+    }
+    
+    public ProductResponseDTO getProductById(Long id) {
+        Product product = productRepository.findById(id)
+                            .orElseThrow(() -> new ProductNotFoundException(id));
+        
+        return productMapper.toResponse(product);
     }
 
 }
