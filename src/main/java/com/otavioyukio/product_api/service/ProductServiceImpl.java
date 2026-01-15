@@ -56,4 +56,11 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.toResponse(updatedProduct);
     }
 
+
+    public void deleteProductById(Long id) { 
+        Product product = productRepository.findById(id)
+                            .orElseThrow(() -> new ProductNotFoundException(id));
+
+        productRepository.delete(product);
+    }
 }
