@@ -9,6 +9,6 @@ public interface ProductService {
     List<ProductResponseDTO> getAllProducts();
     ProductResponseDTO getProductById(Long id);
     ProductResponseDTO createProduct(ProductRequestDTO productRequestDTO);
-    ProductRequestDTO updateProduct(Long id, ProductRequestDTO productRequestDTO);
+    ProductResponseDTO updateProduct(Long id, ProductRequestDTO productRequestDTO);
     void deleteProductById(Long id);
 }
