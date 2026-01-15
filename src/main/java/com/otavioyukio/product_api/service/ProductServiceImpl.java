@@ -21,4 +21,12 @@ public class ProductServiceImpl implements ProductService {
         this.productMapper = productMapper;
     }
 
+    public List<ProductResponseDTO> getAllProducts() {
+        // Ordena por titulo e preço de modo ascendente 
+        Sort sort = Sort.by("title").ascending()
+                .and(Sort.by("price").ascending());
+
+        return productRepository.findAll(sort).stream().map(productMapper::toResponse).toList();
+    }
+
 }
